@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>📚 مكتبة الكتب</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --card: #fff;
+      --text: #333;
+      --muted: #777;
+      --accent: #2563eb;
+      --danger: #d93434;
+      --border: #ddd;
+    }
+    body {
+      font-family: "Cairo", sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: var(--accent);
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+    }
+    header h1 { margin: 0; font-size: 22px; }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px;
+      background: #eef2f7;
+    }
+    .controls input, .controls select {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .stats {
+      padding: 0 15px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 15px;
+      padding: 15px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s;
+    }
+    .card:hover { transform: translateY(-3px); }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card .content { padding: 10px; flex: 1; }
+    .card h3 { margin: 0; font-size: 16px; color: var(--accent); }
+    .card p { margin: 4px 0; font-size: 14px; color: var(--muted); }
+    .actions {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+    }
+    .btn {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      background: #fafafa;
+    }
+    .btn.primary { background: var(--accent); color: #fff; border: none; }
+    .btn.star { background: #ffeaa7; }
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📚 مكتبة الكتب</h1>
+  </header>
+
+  <section class="controls">
+    <input type="text" id="searchInput" placeholder="ابحث عن كتاب...">
+    <select id="categorySelect">
+      <option value="">كل التصنيفات</option>
+      <option value="أدب">أدب</option>
+      <option value="تقنية">تقنية</option>
+      <option value="شبكات">شبكات</option>
+    </select>
+  </section>
+
+  <div class="stats">
+    <span id="resultsCount">0 نتيجة</span> • 
+    <span id="favoritesCount">0 مفضلة</span>
+  </div>
+
+  <section class="grid" id="booksGrid"></section>
+
+  <footer>
+    © 2026 مكتبة تجريبية — تصميم احترافي
+  </footer>
+
+  <script>
+    const books = [
+      {id:"1",title:"مدخل إلى شبكات الحاسوب",author:"أحمد السالمي",category:"شبكات",cover:"https://picsum.photos/300/200?1"},
+      {id:"2",title:"فن كتابة الشعر الحديث",author:"ليلى الزهراء",category:"أدب",cover:"https://picsum.photos/300/200?2"},
+      {id:"3",title:"تصميم واجهات المستخدم",author:"محمد العتيبي",category:"تقنية",cover:"https://picsum.photos/300/200?3"},
+      {id:"4",title:"أمن المعلومات عملياً",author:"سامي الراشد",category:"شبكات",cover:"https://picsum.photos/300/200?4"},
+    ];
+    const grid = document.getElementById("booksGrid");
+    const searchInput = document.getElementById("searchInput");
+    const categorySelect = document.getElementById("categorySelect");
+    const resultsCount = document.getElementById("resultsCount");
+    const favoritesCount = document.getElementById("favoritesCount");
+
+    let favorites = JSON.parse(localStorage.getItem("favorites")||"[]");
+
+    function renderBooks(list) {
+      grid.innerHTML = list.map(b => `
+        <div class="card">
+          <img src="${b.cover}" alt="غلاف كتاب">
+          <div class="content">
+            <h3>${b.title}</h3>
+            <p>المؤلف: ${b.author}</p>
+            <p>التصنيف: ${b.category}</p>
+          </div>
+          <div class="actions">
+            <button class="btn primary" onclick="previewBook('${b.id}')">تفاصيل</button>
+            <button class="btn star" onclick="toggleFavorite('${b.id}')">
+              ${favorites.includes(b.id) ? "⭐ إزالة" : "☆ مفضلة"}
+            </button>
+          </div>
+        </div>
+      `).join("");
+      resultsCount.textContent = list.length+" نتيجة";
+      favoritesCount.textContent = favorites.length+" مفضلة";
+    }
+
+    function filterBooks() {
+      const q = searchInput.value.toLowerCase();
+      const cat = categorySelect.value;
+      const filtered = books.filter(b =>
+        (b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)) &&
+        (!cat || b.category === cat)
+      );
+      renderBooks(filtered);
+    }
+
+    function toggleFavorite(id) {
+      if(favorites.includes(id)) favorites = favorites.filter(f=>f!==id);
+      else favorites.push(id);
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      filterBooks();
+    }
+
+    function previewBook(id) {
+      const b = books.find(x=>x.id===id);
+      alert(`📖 ${b.title}\nالمؤلف: ${b.author}\nالتصنيف: ${b.category}`);
+    }
+
+    searchInput.addEventListener("input", filterBooks);
+    categorySelect.addEventListener("change", filterBooks);
+
+    // أول عرض
+    filterBooks();
+  </script>
+</body>
+</html>
