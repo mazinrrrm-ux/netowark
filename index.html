@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تعلم الشبكات | HTML + CSS + JS</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>تعلم الشبكات</h1>
+    <p class="tagline">من الأساس إلى الاحتراف مع أدوات تفاعلية</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="home">الأساسيات</button>
+    <button class="tab-btn" data-tab="osi">طبقات OSI</button>
+    <button class="tab-btn" data-tab="tcpip">نموذج TCP/IP</button>
+    <button class="tab-btn" data-tab="subnet">حاسبة Subnet</button>
+    <button class="tab-btn" data-tab="tools">أدوات محاكاة</button>
+    <button class="tab-btn" data-tab="glossary">قاموس المصطلحات</button>
+    <button class="tab-btn" data-tab="quiz">اختبار سريع</button>
+  </nav>
+
+  <main>
+    <!-- الأساسيات -->
+    <section id="home" class="tab-panel active">
+      <h2>الأساسيات</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>ما هي الشبكات؟</h3>
+          <p>
+            الشبكة هي مجموعة من الأجهزة (حواسيب، موجهات، مفاتيح...) متصلة
+            لتبادل البيانات والموارد. الهدف هو الإتاحة، الأداء، والأمان.
+          </p>
+          <ul>
+            <li><strong>أنواع الشبكات:</strong> LAN, WAN, MAN, PAN</li>
+            <li><strong>أجهزة الشبكات:</strong> Switch, Router, Access Point, Firewall</li>
+            <li><strong>وسائط النقل:</strong> نحاسية (Ethernet)، ألياف ضوئية، لاسلكي</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>عناوين IP</h3>
+          <p>
+            عنوان IP يعرّف الجهاز على الشبكة. هناك IPv4 (مثل 192.168.1.10)
+            وIPv6 (مثل 2001:db8::1). مع Subnetting نوزّع العناوين بكفاءة.
+          </p>
+        </article>
+        <article class="card">
+          <h3>البروتوكولات الأساسية</h3>
+          <ul>
+            <li><strong>ARP:</strong> يحل عنوان IP إلى MAC داخل الشبكة المحلية</li>
+            <li><strong>ICMP:</strong> رسائل تشخيص مثل Ping</li>
+            <li><strong>TCP/UDP:</strong> نقل موثوق (TCP) أو سريع دون تأكيد (UDP)</li>
+            <li><strong>DHCP:</strong> توزيع عناوين IP تلقائيًا</li>
+            <li><strong>DNS:</strong> تحويل أسماء النطاقات إلى عناوين IP</li>
+          </ul>
+        </article>
+      </div>
+      <blockquote class="tip">
+        نصيحة: تعلّم التفكير بطبقات (OSI/TCP-IP) يساعدك على تحليل أي مشكلة شبكات خطوة بخطوة.
+      </blockquote>
+    </section>
+
+    <!-- طبقات OSI -->
+    <section id="osi" class="tab-panel">
+      <h2>طبقات OSI</h2>
+      <p>
+        نموذج OSI يصف كيف تنتقل البيانات عبر 7 طبقات. اضغط على أي طبقة
+        لمعرفة وظيفتها وأمثلتها.
+      </p>
+      <div class="osi-layers">
+        <!-- الطبقات من 1 إلى 7 -->
+        <button class="osi-layer" data-layer="1">1. الفيزيائية</button>
+        <button class="osi-layer" data-layer="2">2. ربط البيانات</button>
+        <button class="osi-layer" data-layer="3">3. الشبكة</button>
+        <button class="osi-layer" data-layer="4">4. النقل</button>
+        <button class="osi-layer" data-layer="5">5. الجلسة</button>
+        <button class="osi-layer" data-layer="6">6. العرض</button>
+        <button class="osi-layer" data-layer="7">7. التطبيق</button>
+      </div>
+      <div id="osi-details" class="osi-details card">
+        <h3>تفاصيل الطبقة</h3>
+        <div class="details-content">
+          <p>اختر طبقة لعرض التفاصيل هنا.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TCP/IP -->
+    <section id="tcpip" class="tab-panel">
+      <h2>نموذج TCP/IP</h2>
+      <p>
+        نموذج عملي من 4 طبقات: الوصول للشبكة، الإنترنت، النقل، التطبيق.
+        يطابق الواقع أكثر من OSI ويستخدم يوميًا في الإنترنت.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>الوصول للشبكة (Link)</h3>
+          <ul>
+            <li><strong>أمثلة:</strong> Ethernet, Wi‑Fi, PPP</li>
+            <li><strong>وظائف:</strong> التأطير، العناوين MAC، الوصول للوسيط</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>الإنترنت (Internet)</h3>
+          <ul>
+            <li><strong>أمثلة:</strong> IP, ICMP, ARP</li>
+            <li><strong>وظائف:</strong> العنونة، التوجيه، التغليف</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>النقل (Transport)</h3>
+          <ul>
+            <li><strong>أمثلة:</strong> TCP, UDP</li>
+            <li><strong>وظائف:</strong> منافذ، موثوقية، التحكم بالتدفق</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>التطبيق (Application)</h3>
+          <ul>
+            <li><strong>أمثلة:</strong> HTTP, DNS, SMTP, FTP</li>
+            <li><strong>وظائف:</strong> خدمات المستخدم والتطبيقات النهائية</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- حاسبة Subnet -->
+    <section id="subnet" class="tab-panel">
+      <h2>حاسبة Subnet</h2>
+      <p>أدخل عنوان IPv4 مع CIDR (مثل 192.168.1.10/24) للحصول على الشبكة، البث، وعدد المضيفين.</p>
+      <div class="card">
+        <div class="form-row">
+          <label for="cidr-input"><strong>عنوان/CIDR:</strong></label>
+          <input id="cidr-input" type="text" placeholder="مثال: 10.0.1.5/24" />
+          <button id="calc-btn" class="primary">احسب</button>
+        </div>
+        <div id="subnet-result" class="result">
+          <p>النتائج ستظهر هنا.</p>
+        </div>
+      </div>
+      <blockquote class="tip">
+        تذكّر: قناع /24 يعني قناع 255.255.255.0 بعدد مضيفين 254 (من 2^8 − 2).
+      </blockquote>
+    </section>
+
+    <!-- أدوات محاكاة -->
+    <section id="tools" class="tab-panel">
+      <h2>أدوات محاكاة</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>محاكاة Ping (ICMP)</h3>
+          <p>اكتب عنوان IP أو اسم نطاق لتجربة استجابة وهمية توضيحية.</p>
+          <div class="form-row">
+            <input id="ping-host" type="text" placeholder="مثال: example.com أو 8.8.8.8" />
+            <button id="ping-btn">Ping</button>
+          </div>
+          <pre id="ping-output" class="terminal">جاهز...</pre>
+        </article>
+        <article class="card">
+          <h3>محاكاة Traceroute</h3>
+          <p>يعرض قفزات وهمية لتوضيح فكرة التوجيه.</p>
+          <div class="form-row">
+            <input id="trace-host" type="text" placeholder="مثال: wikipedia.org" />
+            <button id="trace-btn">Trace</button>
+          </div>
+          <pre id="trace-output" class="terminal">جاهز...</pre>
+        </article>
+      </div>
+    </section>
+
+    <!-- قاموس المصطلحات -->
+    <section id="glossary" class="tab-panel">
+      <h2>قاموس المصطلحات</h2>
+      <ul class="glossary">
+        <li><strong>MAC Address:</strong> عنوان طبقة ربط البيانات الفريد لكل واجهة شبكة.</li>
+        <li><strong>MTU:</strong> أكبر حجم إطار يمكن إرساله دون تجزئة.</li>
+        <li><strong>NAT:</strong> ترجمة عناوين الشبكة لإتاحة مشاركة عنوان عام واحد.</li>
+        <li><strong>VLAN:</strong> شبكة افتراضية تفصل حركة المرور منطقيًا.</li>
+        <li><strong>CIDR:</strong> ترميز مرن للأقنعة مثل /24 بدلًا من 255.255.255.0.</li>
+        <li><strong>Default Gateway:</strong> الموجه الذي يخرج منه المرور خارج الشبكة المحلية.</li>
+      </ul>
+    </section>
+
+    <!-- اختبار سريع -->
+    <section id="quiz" class="tab-panel">
+      <h2>اختبار سريع</h2>
+      <p>اختبر فهمك لأساسيات الشبكات. اختر الإجابات ثم اضغط "تصحيح".</p>
+      <form id="quiz-form" class="card">
+        <div class="q">
+          <p><strong>1:</strong> أي طبقة مسؤولة عن التوجيه وعناوين IP؟</p>
+          <label><input type="radio" name="q1" value="network" /> طبقة الشبكة (OSI 3)</label>
+          <label><input type="radio" name="q1" value="transport" /> طبقة النقل (OSI 4)</label>
+        </div>
+        <div class="q">
+          <p><strong>2:</strong> أي بروتوكول يستخدم للأسماء إلى IP؟</p>
+          <label><input type="radio" name="q2" value="dns" /> DNS</label>
+          <label><input type="radio" name="q2" value="dhcp" /> DHCP</label>
+        </div>
+        <div class="q">
+          <p><strong>3:</strong> في /26 كم عدد المضيفين القابلين للتخصيص؟</p>
+          <label><input type="radio" name="q3" value="62" /> 62</label>
+          <label><input type="radio" name="q3" value="64" /> 64</label>
+        </div>
+        <button type="button" id="grade-btn" class="primary">تصحيح</button>
+        <div id="quiz-result" class="result"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 تعليم الشبكات. هذا الموقع للتعلم الذاتي والأمثلة التوضيحية.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
